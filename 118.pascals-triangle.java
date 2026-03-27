@@ -38,10 +38,27 @@
 // @lc code=start
 class Solution {
     public List<List<Integer>> generate(int numRows) {
-        int[][] res = new int[numRows][numRows];
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> initialList  = new ArrayList<>();
+        initialList.add(1);
+        res.add(initialList);
+        for(int i = 1 ;i < numRows ; i++) {
+            List<Integer> li = new ArrayList<>();
+            for(int j=0;j<=i;j++){
+                Integer jValue = 0;
+                if(j==0){
+                    jValue = res.get(i-1).get(j);   
+                }else if(j==i){
+                    jValue = res.get(i-1).get(j-1);   
+                }else{
+                    jValue = res.get(i-1).get(j-1) + res.get(i-1).get(j);   
+                }
+                li.add(jValue);
+            }
+            res.add(li);
+        }
 
-
-        
+        return res;
     }
 }
 // @lc code=end
